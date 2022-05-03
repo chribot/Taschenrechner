@@ -1,0 +1,37 @@
+body {
+    margin: 0;
+}
+#calculator {
+    position: relative;
+    top: 30px;
+    left: 30px;
+    width: 216px;
+    height: 214px;
+    font-size: 0; /* remove space between buttons */
+    background-color: gray;
+    border-radius: 5px;
+    padding-left: 4px;
+}
+#display {
+    padding: 1px 2px;
+    border: 2px solid black;
+    height: 30px;
+    width: 204px;
+    font-size: 16px;
+    margin-top: 4px;
+    text-align: right;
+    background-color: white;
+    color: black;
+}
+button {
+    font-size: 20px;
+    width: 50px;
+    margin-top: 4px;
+    margin-right: 4px;
+}
+.span2 {
+    width: 104px;
+}
+.span3 {
+    width: 158px;
+}
