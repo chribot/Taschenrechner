@@ -2,6 +2,7 @@
 
 body {
     margin: 0;
+    height: 100vh;
 }
 #calculator {
     position: relative;
@@ -38,4 +39,10 @@ button {
 }
 .span3 {
     width: 158px;
+}
+#hint {
+    position: relative;
+    top: 50px;
+    left: 10px;
+    width: calc(100% - 10px);
 }
