@@ -79,20 +79,17 @@ function operatorInput() {
         // wenn Operator anstatt '=' gedrückt, Zwischenergebnis berechnen
         calculate();
         operator = this.innerHTML;
-        document.getElementById("display").value = op1;
         state = 'OP';
     } else if (state === 'OP') {
         // Operator wird gewechselt
-        calculate();
         operator = this.innerHTML;
-        document.getElementById("display").value = op1 + ' ' + operator + ' ';
     } else if (state === 'START' || state === 'OP1' || state === 'RESULT') {
         // Operator nach Eingabe von op1
         // op1 ist am Anfang 0 oder enthält am Ende das Ergebnis
         operator = this.innerHTML;
-        document.getElementById("display").value = op1 + ' ' + operator + ' ';
         state = 'OP';
     }
+    document.getElementById("display").value = op1 + ' ' + operator + ' ';
     floatInput = false;
     this.blur(); // Focus von der Taste nehmen
 }
