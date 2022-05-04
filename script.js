@@ -51,6 +51,7 @@ function numberInput() {
         document.getElementById("display").value = op1 + ' ' + operator + ' ' + op2;
         state = 'OP2';
     }
+    this.blur(); // Focus von der Taste nehmen
 }
 
 function dotInput() {
@@ -70,7 +71,7 @@ function dotInput() {
         floatInput = true;
         state = 'OP2';
     }
-    //console.log(this.innerHTML);
+    this.blur(); // Focus von der Taste nehmen
 }
 
 function operatorInput() {
@@ -93,6 +94,7 @@ function operatorInput() {
         state = 'OP';
     }
     floatInput = false;
+    this.blur(); // Focus von der Taste nehmen
 }
 
 function calculate() {
@@ -124,6 +126,7 @@ function showResult() {
     }
     operator = '';
     state = 'RESULT';
+    this.blur(); // Focus von der Taste nehmen
 }
 
 function clearDisplay() {
@@ -133,6 +136,7 @@ function clearDisplay() {
     floatInput = false;
     document.getElementById("display").value = '';
     state = 'START';
+    this.blur(); // Focus von der Taste nehmen
 }
 
 function keyPressed(event) {
