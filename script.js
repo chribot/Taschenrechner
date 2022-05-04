@@ -1,7 +1,8 @@
 // globals
 let op1 = '0';
-let op2 = '';
+let op2 = '0';
 let operator = '';
+let floatInput = false;
 let state = 'START'; // START, OP1, OP, OP2, RESULT
 
 function addEvents() {
@@ -40,14 +41,33 @@ function numberInput() {
         }
         document.getElementById("display").value = op1;
     } else if (state === 'OP' || state === 'OP2') {
+        if (op2 === '0')
+            op2 = '';
         // Operator wurde schon eingegeben
         op2 += this.innerHTML;
         document.getElementById("display").value = op1 + ' ' + operator + ' ' + op2;
+        state = 'OP2';
     }
 }
 
 function dotInput() {
-    console.log(this.innerHTML);
+    if (state === 'RESULT') {
+        op1 = '0.';
+        document.getElementById("display").value = op1;
+        floatInput = true;
+        state = 'OP1';
+    } else if ((state === 'START' || state === 'OP1') && !floatInput) {
+        op1 += '.';
+        document.getElementById("display").value = op1;
+        floatInput = true;
+        state = 'OP1';
+    } else if ((state === 'OP' || state === 'OP2') && !floatInput) {
+        op2 += '.';
+        document.getElementById("display").value = op1 + ' ' + operator + ' ' + op2;
+        floatInput = true;
+        state = 'OP2';
+    }
+    //console.log(this.innerHTML);
 }
 
 function operatorInput() {
@@ -69,6 +89,7 @@ function operatorInput() {
         document.getElementById("display").value = op1 + ' ' + operator + ' ';
         state = 'OP';
     }
+    floatInput = false;
 }
 
 function calculate() {
@@ -83,7 +104,8 @@ function calculate() {
     } else if (operator === '\u00F7') {
         op1 = x / y;
     }
-    op2 = '';
+    op2 = '0';
+    floatInput = false;
 }
 
 function showResult() {
@@ -96,7 +118,8 @@ function showResult() {
 function clearDisplay() {
     op1 = '0';
     operator = '';
-    op2 = '';
+    op2 = '0';
+    floatInput = false;
     document.getElementById("display").value = '';
     state = 'START';
 }
