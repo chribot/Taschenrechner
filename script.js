@@ -21,7 +21,7 @@ function addEvents() {
     // operators
     document.getElementById('plus').addEventListener('click', operatorInput);
     document.getElementById('minus').addEventListener('click', operatorInput);
-    document.getElementById('mult').addEventListener('click', operatorInput);
+    document.getElementById('times').addEventListener('click', operatorInput);
     document.getElementById('divide').addEventListener('click', operatorInput);
     // equals
     document.getElementById('equals').addEventListener('click', showResult);
@@ -78,9 +78,9 @@ function calculate() {
         op1 = x + y;
     } else if (operator === '-') {
         op1 = x - y;
-    } else if (operator === '*') {
+    } else if (operator === '\u00D7') {
         op1 = x * y;
-    } else if (operator === '/') {
+    } else if (operator === '\u00F7') {
         op1 = x / y;
     }
     op2 = '';
