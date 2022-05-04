@@ -2,6 +2,7 @@
 let op1 = '0';
 let op2 = '';
 let operator = '';
+let state = 'START'; // START, OP1, OP, OP2, RESULT
 
 function addEvents() {
     // numbers
@@ -20,8 +21,8 @@ function addEvents() {
     // operators
     document.getElementById('plus').addEventListener('click', operatorInput);
     document.getElementById('minus').addEventListener('click', operatorInput);
-    document.getElementById('star').addEventListener('click', operatorInput);
-    document.getElementById('slash').addEventListener('click', operatorInput);
+    document.getElementById('mult').addEventListener('click', operatorInput);
+    document.getElementById('divide').addEventListener('click', operatorInput);
     // equals
     document.getElementById('equals').addEventListener('click', showResult);
     // clear
@@ -29,20 +30,17 @@ function addEvents() {
 }
 
 function numberInput() {
-    // wenn in op1 eine Zahl steht, dann ist es ein Zwischenergebnis
-    // wenn nun erneut eine Zahl eingegeben wurde, müssen wir op1 vorher löschen
-    if (typeof op1 === "number")
-        op1 = '0';
-    // noch kein Operator eingegeben
-    if (operator === '') {
-        if (op1 === '0') {
+    if (state === 'START' || state === 'OP1') {
+        // noch kein Operator eingegeben
+        if (state === 'START') {
             op1 = this.innerHTML;
+            state = 'OP1';
         } else {
             op1 += this.innerHTML;
         }
         document.getElementById("display").value = op1;
-    // Operator wurde schon eingegeben
-    } else {
+    } else if (state === 'OP' || state === 'OP2') {
+        // Operator wurde schon eingegeben
         op2 += this.innerHTML;
         document.getElementById("display").value = op1 + ' ' + operator + ' ' + op2;
     }
@@ -53,17 +51,23 @@ function dotInput() {
 }
 
 function operatorInput() {
-    // in op1 steht das Ergebnis von calculate()
-    // wieder in string umwandeln damit
-    if (typeof op1 === "number")
-        op1 = op1.toString();
-    operator = this.innerHTML;
-    // wenn Operator anstatt '=' gedrückt, Zwischenergebnis berechnen
-    if (operator !== '' && op2 !== '') {
+    if (state === 'OP2') {
+        // wenn Operator anstatt '=' gedrückt, Zwischenergebnis berechnen
         calculate();
+        operator = this.innerHTML;
         document.getElementById("display").value = op1;
-    } else {
+        state = 'OP';
+    } else if (state === 'OP') {
+        // Operator wird gewechselt
+        calculate();
+        operator = this.innerHTML;
         document.getElementById("display").value = op1 + ' ' + operator + ' ';
+    } else if (state === 'START' || state === 'OP1' || state === 'RESULT') {
+        // Operator nach Eingabe von op1
+        // op1 ist am Anfang 0 oder enthält am Ende das Ergebnis
+        operator = this.innerHTML;
+        document.getElementById("display").value = op1 + ' ' + operator + ' ';
+        state = 'OP';
     }
 }
 
@@ -85,13 +89,14 @@ function calculate() {
 function showResult() {
     calculate();
     document.getElementById("display").value = op1;
-    //op1 = '0';
-    op2 = '';
     operator = '';
+    state = 'RESULT';
 }
 
 function clearDisplay() {
     op1 = '0';
+    operator = '';
     op2 = '';
     document.getElementById("display").value = '';
+    state = 'START';
 }
