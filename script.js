@@ -28,6 +28,8 @@ function addEvents() {
     document.getElementById('equals').addEventListener('click', showResult);
     // clear
     document.getElementById('clear').addEventListener('click', clearDisplay);
+    // Tastatur
+    document.addEventListener('keyup', keyPressed);
 }
 
 function numberInput() {
@@ -130,4 +132,26 @@ function clearDisplay() {
     floatInput = false;
     document.getElementById("display").value = '';
     state = 'START';
+}
+
+function keyPressed(event) {
+    switch (event.key) {
+        case '0': document.getElementById('zero').click(); break;
+        case '1': document.getElementById('one').click(); break;
+        case '2': document.getElementById('two').click(); break;
+        case '3': document.getElementById('three').click(); break;
+        case '4': document.getElementById('four').click(); break;
+        case '5': document.getElementById('five').click(); break;
+        case '6': document.getElementById('six').click(); break;
+        case '7': document.getElementById('seven').click(); break;
+        case '8': document.getElementById('eight').click(); break;
+        case '9': document.getElementById('nine').click(); break;
+        case '.': document.getElementById('dot').click(); break;
+        case '+': document.getElementById('plus').click(); break;
+        case '-': document.getElementById('minus').click(); break;
+        case '*': document.getElementById('times').click(); break;
+        case '/': document.getElementById('divide').click(); break;
+        case 'Enter': document.getElementById('equals').click(); break;
+        case 'Backspace': document.getElementById('clear').click(); break;
+    }
 }
