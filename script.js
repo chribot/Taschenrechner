@@ -102,7 +102,13 @@ function calculate() {
     } else if (operator === '\u00D7') {
         op1 = x * y;
     } else if (operator === '\u00F7') {
-        op1 = x / y;
+        if (y !== 0) {
+            op1 = x / y;
+        } else {
+            clearDisplay();
+            document.getElementById("display").value = 'Division durch 0';
+            state = 'ERROR';
+        }
     }
     op2 = '0';
     floatInput = false;
@@ -110,7 +116,9 @@ function calculate() {
 
 function showResult() {
     calculate();
-    document.getElementById("display").value = op1;
+    if (state !== 'ERROR') {
+        document.getElementById("display").value = op1;
+    }
     operator = '';
     state = 'RESULT';
 }
