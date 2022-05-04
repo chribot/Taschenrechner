@@ -6,10 +6,10 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
-<body onload="addEvents()">
+<body onload="addEvents(); clearDisplay()">
 <div id="calculator">
     <label for="display"></label>
-    <input id="display" disabled>
+    <input id="display" value="" disabled>
     <button id="clear" class="span3">Clear</button>
     <button id="plus">+</button>
 
