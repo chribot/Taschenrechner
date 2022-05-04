@@ -34,9 +34,9 @@ function addEvents() {
 }
 
 function numberInput() {
-    if (state === 'START' || state === 'OP1') {
+    if (state === 'START' || state === 'RESULT' || state === 'OP1') {
         // noch kein Operator eingegeben
-        if (state === 'START') {
+        if (state === 'START' || state === 'RESULT' || op1 === '0') {
             op1 = this.innerHTML;
             state = 'OP1';
         } else {
