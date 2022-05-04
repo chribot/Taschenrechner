@@ -30,6 +30,7 @@ function addEvents() {
     document.getElementById('clear').addEventListener('click', clearDisplay);
     // Tastatur
     document.addEventListener('keyup', keyPressed);
+    document.addEventListener('keydown', preventShortcuts);
 }
 
 function numberInput() {
@@ -153,5 +154,15 @@ function keyPressed(event) {
         case '/': document.getElementById('divide').click(); break;
         case 'Enter': document.getElementById('equals').click(); break;
         case 'Backspace': document.getElementById('clear').click(); break;
+    }
+}
+
+function preventShortcuts(event) {
+    // Shortcuts im Browser ausschalten, die unsere Tastenkombinationen verwenden
+    // 'shift' + '*'
+    // 'shift' + '/'
+    if (event.shiftKey) {
+        if (event.key === '*' || event.key === '/')
+        event.preventDefault();
     }
 }
